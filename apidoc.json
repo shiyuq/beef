@@ -1,0 +1,11 @@
+{
+  "name": "node template接口文档",
+  "version": "1.0.0",
+  "description": "node template接口文档",
+  "title": "施雨强",
+  "url": "",
+  "header": {
+    "title": "通用配置信息",
+    "filename": "apidoc-header.md"
+  }
+}
