@@ -6,6 +6,11 @@ const utility = require('../../util');
 const snowFlakeID = utility.seqId;
 
 /**
+ * md5（雪花+uuid）
+ */
+const uniqueId = utility.md5SeqId;
+
+/**
  * uuid，带-横线分隔符
  */
 const uuid = utility.uuid;
@@ -22,6 +27,7 @@ const autoIncrement = () => undefined;
 
 module.exports = {
   snowFlakeID,
+  uniqueId,
   uuid,
   uuidPure,
   autoIncrement

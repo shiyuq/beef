@@ -413,6 +413,14 @@ const highlightIllegalText = (data) => {
   };
 };
 
+/**
+ * 删除文件
+ */
+const deleteUploadFile = (file) => {
+  if (!file || !file.filepath) return;
+  deleteFile(file.filepath);
+};
+
 module.exports = {
   uuid,
   uuidPure,
@@ -438,5 +446,6 @@ module.exports = {
   getIp,
   uniqueFilename,
   delay,
-  highlightIllegalText
+  highlightIllegalText,
+  deleteUploadFile
 };

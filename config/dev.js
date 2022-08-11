@@ -41,7 +41,7 @@ const redis = {
 const mysql = {
   name: 'db_wnb',
   logSql: true,
-  connection: {
+  db: {
     write: {
       host: '127.0.0.1',
       port: 3306,

@@ -1,8 +1,11 @@
 const Koa = require('koa');
+const path = require('path');
+const config = require('config');
 const cors = require('@koa/cors');
+const koaBody = require('koa-body');
 const helmet = require('koa-helmet');
 const bodyParser = require('koa-bodyparser');
-const config = require('config');
+const { v4: uuidv4 } = require('uuid');
 const router = require('./server-router');
 const { bizLogger } = require('./core/logger');
 // const jobService = require('./services/job-service');
@@ -85,6 +88,28 @@ app.use(
   })
 );
 app.use(session);
+
+app.use(
+  koaBody({
+    multipart: true,
+    jsonLimit: '20mb',
+    formLimit: '50mb',
+    formidable: {
+      multiples: false,
+      maxFileSize: 50 * 1024 * 1024, // Bytes
+      keepExtensions: true,
+      uploadDir: path.join(__dirname, '/temp'),
+      onFileBegin: (_, file) => {
+        // 重命名文件名称
+        file.newFilename = uuidv4() + path.extname(file.newFilename);
+      }
+    },
+    onError: (err) => {
+      bizLogger.error('[bodyError] body parse error', err);
+      throw err;
+    }
+  })
+);
 
 app.use(context.httpCtx);
 

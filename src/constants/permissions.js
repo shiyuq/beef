@@ -1,5 +1,3 @@
-const _ = require('lodash');
-
 /**
  * 权限
  */
@@ -7,24 +5,17 @@ const permissions = {
   login: {
     authLogin: 'api-login-authLogin'
   },
-  openFile: {
-    uploadBase64: 'api-openFile-uploadBase64'
+  file: {
+    importFile: 'api-file-importFile'
   }
 };
-
-/**
- * ops用户
- */
-const ops = [
-  ..._.values(permissions.openFile)
-];
 
 /**
  * 匿名用户
  */
 const anonymous = [
-  ...ops,
-  permissions.login.authLogin
+  permissions.login.authLogin,
+  permissions.file.importFile
 ];
 
 /**
@@ -35,17 +26,10 @@ const normal = [
 ];
 
 /**
- * 实名认证管理员用户
+ * 管理员用户
  */
 const admin = [
   ...normal
-];
-
-/**
- * 实名认证超级管理员用户
- */
-const superAdmin = [
-  ...admin
 ];
 
 /**
@@ -56,8 +40,7 @@ const superAdmin = [
 const role = {
   anonymous: anonymous,
   normal: normal,
-  admin: admin,
-  superAdmin: superAdmin
+  admin: admin
 };
 
 module.exports = {
