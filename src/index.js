@@ -60,6 +60,28 @@ app.use(
 );
 
 app.use(
+  koaBody({
+    multipart: true,
+    jsonLimit: '20mb',
+    formLimit: '50mb',
+    formidable: {
+      multiples: false,
+      maxFileSize: 50 * 1024 * 1024, // Bytes
+      keepExtensions: true,
+      uploadDir: path.join(__dirname, '/temp'),
+      onFileBegin: (_, file) => {
+        // 重命名文件名称
+        file.newFilename = uuidv4() + path.extname(file.newFilename);
+      }
+    },
+    onError: (err) => {
+      bizLogger.error('[bodyError] body parse error', err);
+      throw err;
+    }
+  })
+);
+
+app.use(
   bodyParser({
     // content-type为text/plain时也转换为json，兼容express架构时的设置
     extendTypes: {
@@ -88,28 +110,6 @@ app.use(
   })
 );
 app.use(session);
-
-app.use(
-  koaBody({
-    multipart: true,
-    jsonLimit: '20mb',
-    formLimit: '50mb',
-    formidable: {
-      multiples: false,
-      maxFileSize: 50 * 1024 * 1024, // Bytes
-      keepExtensions: true,
-      uploadDir: path.join(__dirname, '/temp'),
-      onFileBegin: (_, file) => {
-        // 重命名文件名称
-        file.newFilename = uuidv4() + path.extname(file.newFilename);
-      }
-    },
-    onError: (err) => {
-      bizLogger.error('[bodyError] body parse error', err);
-      throw err;
-    }
-  })
-);
 
 app.use(context.httpCtx);
 
