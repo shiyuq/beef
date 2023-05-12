@@ -6,7 +6,9 @@ const permissions = {
     authLogin: 'api-login-authLogin'
   },
   file: {
-    importFile: 'api-file-importFile'
+    importFile: 'api-file-importFile',
+    insertData: 'api-file-insertData',
+    getProvince: 'api-file-getProvince'
   }
 };
 
@@ -15,7 +17,9 @@ const permissions = {
  */
 const anonymous = [
   permissions.login.authLogin,
-  permissions.file.importFile
+  permissions.file.importFile,
+  permissions.file.insertData,
+  permissions.file.getProvince
 ];
 
 /**

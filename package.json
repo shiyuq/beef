@@ -47,6 +47,7 @@
     "mysql2": "^2.3.0",
     "node-rsa": "^1.1.1",
     "node-schedule": "^2.1.0",
+    "node-xlsx": "^0.21.2",
     "path-to-regexp": "^6.2.0",
     "qs": "^6.10.1",
     "redlock": "^4.2.0",

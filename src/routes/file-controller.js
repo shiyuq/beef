@@ -51,8 +51,45 @@ const importFile = async(ctx) => {
   }
 };
 
+const insertData = async(ctx) => {
+  const result = await db.transaction(() => fileService.insertData());
+  ctx.ok(result);
+};
+
+const getProvince = async(ctx) => {
+  const result = await fileService.getProvince();
+  ctx.ok(result);
+};
+
+const getData = async(ctx) => {
+  const body = ctx.request.body;
+  let input = {
+    type: body.type || 'beef',
+    startDate: body.startDate,
+    endDate: body.endDate,
+    provinceList: body.provinceList || []
+  };
+
+  const schema = joi.object({
+    type: joi.string().valid('beef', 'beefGuess').required(),
+    startDate: joi.date().formatDate(),
+    endDate: joi.date().formatDate(),
+    provinceList: joi.array().items(joi.string().nullable())
+  });
+  const valid = schema.validate(input, { allowUnknown: true });
+  if (valid.error) {
+    throw valid.error;
+  }
+  input = valid.value;
+  const result = await fileService.getData(input);
+  ctx.ok(result);
+};
+
 const router = new Router({
   prefix: '/file'
 });
 router.post('/import', acl({ permission: permissions.file.importFile }), importFile);
+router.post('/data/insert', acl({ permission: permissions.file.insertData }), insertData);
+router.post('/province/get', acl({ permission: permissions.file.getProvince }), getProvince);
+router.post('/data/get', acl({ permission: permissions.file.getData }), getData);
 module.exports = router;

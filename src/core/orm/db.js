@@ -11,7 +11,7 @@ const db = new KnexPro({
   logSql: config.get('mysql').logSql,
   ns: ns,
   modelConfig: {
-    idGenerator: idStrategy.uniqueId
+    idGenerator: idStrategy.snowFlakeID
   },
   config: {
     client: 'mysql2',

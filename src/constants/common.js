@@ -1,7 +1,7 @@
 module.exports = Object.freeze({
   platform: 'template',
   prefix: 'template',
-  database: 'db_wnb',
+  database: 'db_beef',
   anonymousUser: Object.freeze({
     id: '0000000000000000000',
     name: 'anonymousUser'

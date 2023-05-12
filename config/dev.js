@@ -39,13 +39,13 @@ const redis = {
 };
 
 const mysql = {
-  name: 'db_wnb',
+  name: 'db_beef',
   logSql: true,
   db: {
     write: {
       host: '127.0.0.1',
       port: 3306,
-      database: 'db_wnb',
+      database: 'db_beef',
       user: 'root',
       password: 'shiyuq',
       dateStrings: true
@@ -53,7 +53,7 @@ const mysql = {
     read: [{
       host: '127.0.0.1',
       port: 3306,
-      database: 'db_wnb',
+      database: 'db_beef',
       user: 'root',
       password: 'shiyuq',
       dateStrings: true
